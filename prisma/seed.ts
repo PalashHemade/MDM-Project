@@ -2,7 +2,7 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import { PrismaClient } from "../src/generated/prisma/client";
 import type { QuestionCategory, Difficulty } from "../src/generated/prisma/enums";
 
-const adapter = new PrismaPg({ connectionString: process.env.DATABASE_URL });
+const adapter = new PrismaPg({ connectionString: process.env.DIRECT_URL });
 const prisma = new PrismaClient({ adapter });
 
 interface SeedQuestion {
@@ -140,21 +140,76 @@ const questions: SeedQuestion[] = [
   { code: "Q100", textDe: "Warum sollten wir uns für Sie entscheiden?", textEn: "Why should we choose you?", category: "STRENGTHS", difficulty: "INTERMEDIATE", cefrRelevance: "B2", purpose: "Final candidate value proposition.", followUpTopics: ["strengths", "experience", "motivation", "role fit"] },
 ];
 
-async function main() {
-  for (const q of questions) {
-    await prisma.interviewQuestionBank.upsert({
-      where: { code: q.code },
-      update: q,
-      create: q,
-    });
-  }
-  console.log(`Seeded ${questions.length} HR interview questions.`);
+async function testConnection() {
+  console.log("========================================");
+  console.log("Testing database connection...");
+  console.log("========================================");
+
+  await prisma.$queryRaw`SELECT 1`;
+
+  console.log("✅ Database connection successful.");
+  console.log("========================================");
 }
 
-main()
-  .then(() => prisma.$disconnect())
+async function main() {
+  console.log("========================================");
+  console.log(`Starting seed of ${questions.length} questions...`);
+  console.log("========================================");
+
+  for (const [index, q] of questions.entries()) {
+    console.log(
+      `\n[${index + 1}/${questions.length}] Processing ${q.code}`
+    );
+
+    try {
+      const result = await prisma.interviewQuestionBank.upsert({
+        where: { code: q.code },
+        update: q,
+        create: q,
+      });
+
+      console.log(
+        `[${index + 1}/${questions.length}] ✅ SUCCESS ${q.code}`
+      );
+
+      console.log(
+        `Database ID: ${
+          (result as { id?: string | number }).id ?? "unknown"
+        }`
+      );
+    } catch (error) {
+      console.error(
+        `\n[${index + 1}/${questions.length}] ❌ FAILED ${q.code}`
+      );
+
+      console.error("\nQuestion Data:");
+      console.error(JSON.stringify(q, null, 2));
+
+      console.error("\nError Details:");
+      console.error(error);
+
+      throw error;
+    }
+  }
+
+  console.log("\n========================================");
+  console.log(`✅ Seeded ${questions.length} HR interview questions.`);
+  console.log("========================================");
+}
+
+testConnection()
+  .then(() => main())
+  .then(async () => {
+    console.log("Disconnecting Prisma...");
+    await prisma.$disconnect();
+    console.log("Done.");
+  })
   .catch(async (e) => {
+    console.error("\n========================================");
+    console.error("❌ SEED FAILED");
+    console.error("========================================");
     console.error(e);
+
     await prisma.$disconnect();
     process.exit(1);
   });
