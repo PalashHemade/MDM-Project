@@ -72,8 +72,11 @@ export async function processAnswer(interview: Interview, turn: InterviewTurn, a
     data: { transcript: answerText, answeredAt: new Date() },
   });
 
-  const [profile, allTurns, existingClaims] = await Promise.all([
+  const [profile, experiences, projects, skills, allTurns, existingClaims] = await Promise.all([
     prisma.candidateProfile.findUniqueOrThrow({ where: { id: interview.profileId } }),
+    prisma.experience.findMany({ where: { profileId: interview.profileId } }),
+    prisma.projectEntry.findMany({ where: { profileId: interview.profileId } }),
+    prisma.skillEntry.findMany({ where: { profileId: interview.profileId } }),
     prisma.interviewTurn.findMany({ where: { interviewId: interview.id }, orderBy: { sequence: "asc" } }),
     prisma.interviewClaim.findMany({ where: { interviewId: interview.id } }),
   ]);
@@ -83,6 +86,9 @@ export async function processAnswer(interview: Interview, turn: InterviewTurn, a
 
   const result = await callOrchestrator({
     profile,
+    experiences,
+    projects,
+    skills,
     interview,
     recentTurns,
     claims: existingClaims,

@@ -50,7 +50,7 @@ export default async function DashboardPage() {
           <span className="text-xs text-ink-faint">{t.dashboard.completeProfileSub}</span>
           <Link
             href="/profile"
-            className="mt-1 w-fit rounded-[10px] bg-red px-3.5 py-2 text-[13px] font-semibold text-white"
+            className="mt-1 w-fit rounded-[10px] bg-red px-3.5 py-2 text-[13px] font-semibold text-white transition-colors duration-150 hover:bg-[#9c3625] active:bg-[#8a2f20]"
           >
             {t.dashboard.completeProfileCta}
           </Link>

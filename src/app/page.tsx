@@ -19,10 +19,16 @@ export default async function LandingPage() {
         <p className="text-ink-soft">{t.landing.subtitle}</p>
       </div>
       <div className="flex gap-3">
-        <Link href="/signup" className="rounded-[10px] bg-red px-5 py-2.5 text-sm font-semibold text-white">
+        <Link
+          href="/signup"
+          className="rounded-[10px] bg-red px-5 py-2.5 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#9c3625] active:bg-[#8a2f20]"
+        >
           {t.landing.createAccount}
         </Link>
-        <Link href="/login" className="rounded-[10px] border border-border px-5 py-2.5 text-sm font-semibold">
+        <Link
+          href="/login"
+          className="rounded-[10px] border border-border bg-card px-5 py-2.5 text-sm font-semibold text-ink transition-colors duration-150 hover:bg-ground hover:border-ink/30"
+        >
           {t.landing.logIn}
         </Link>
       </div>

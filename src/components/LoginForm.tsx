@@ -4,6 +4,7 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
+import { Button } from "@/components/ui/Button";
 
 export function LoginForm({ t }: { t: Dictionary["auth"] }) {
   const router = useRouter();
@@ -60,15 +61,11 @@ export function LoginForm({ t }: { t: Dictionary["auth"] }) {
         />
       </div>
       {error && <p className="text-sm text-red">{error}</p>}
-      <button
-        type="submit"
-        disabled={loading}
-        className="rounded-[10px] bg-red px-4 py-2.5 text-sm font-semibold text-white disabled:opacity-60"
-      >
+      <Button type="submit" disabled={loading}>
         {loading ? t.loggingIn : t.logIn}
-      </button>
+      </Button>
       <p className="text-sm text-ink-soft">
-        <Link href="/signup" className="font-semibold text-ink">
+        <Link href="/signup" className="font-semibold text-ink underline decoration-border underline-offset-2 transition-colors hover:text-red hover:decoration-red">
           {t.noAccount}
         </Link>
       </p>

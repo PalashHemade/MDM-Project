@@ -461,9 +461,22 @@ Phase 4 — Voice
 Phase 5 — Language + speech evaluation
   Evaluation prompt wired up, speech metrics computed and stored.
 
-Phase 6 — CV/Lebenslauf + job description analyzer
-  CV upload/parsing, section-level AI coaching, job description structured
-  extraction + language-requirement classification.
+Phase 6 — CV/Lebenslauf [CV upload/parsing + coaching done; job description analyzer not started]
+  CV upload (PDF/DOCX/text) → text extraction (pdf-parse, mammoth) → one Gemini call that both
+  extracts structured experience/projects/skills/education AND generates German-CV-convention
+  coaching suggestions → editable review screen → on confirm, writes into CandidateProfile/
+  Experience/ProjectEntry/SkillEntry. Verified end-to-end against the real database: extraction
+  accuracy, date parsing (including "Present" → null endDate), and grounded suggestions all
+  confirmed correct on a real sample CV.
+  Crucially, this is now wired into the interview orchestrator's prompt (src/lib/interview/
+  orchestrator.ts) — confirmed live that a follow-up question named a candidate's employer by
+  name ("TechNova Solutions") that only existed in their uploaded CV, not in anything they'd
+  said in the conversation. This was the actual point of doing this phase before scoring/voice.
+  Scope cut: the original CV file itself isn't persisted anywhere (no Supabase Storage wiring
+  yet) — only the extracted text/structured data. Re-downloading the original file isn't
+  possible yet; re-parsing is.
+  Job description analyzer (structured extraction + language-requirement classification) is
+  still Phase 6 scope per the original plan but wasn't part of this pass.
 
 Phase 7 — Company knowledge + RAG
   Initial 10 companies seeded, KnowledgeSource + embeddings + retrieval wired

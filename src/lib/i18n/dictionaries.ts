@@ -83,6 +83,41 @@ export interface Dictionary {
     createAccount: string;
     logIn: string;
   };
+  cv: {
+    title: string;
+    subtitle: string;
+    uploadLabel: string;
+    uploadHint: string;
+    analyzeButton: string;
+    analyzing: string;
+    orDivider: string;
+    manualEntry: string;
+    existingTitle: string;
+    noExistingData: string;
+    reviewTitle: string;
+    reviewSubtitle: string;
+    degree: string;
+    university: string;
+    experiencesTitle: string;
+    company: string;
+    role: string;
+    startDate: string;
+    endDate: string;
+    present: string;
+    description: string;
+    projectsTitle: string;
+    projectTitle: string;
+    technologies: string;
+    skillsTitle: string;
+    skillName: string;
+    hobbiesTitle: string;
+    suggestionsTitle: string;
+    removeEntry: string;
+    applyButton: string;
+    applying: string;
+    appliedSuccess: string;
+    errorGeneric: string;
+  };
 }
 
 export const dictionaries: Record<UiLanguage, Dictionary> = {
@@ -167,6 +202,41 @@ export const dictionaries: Record<UiLanguage, Dictionary> = {
       createAccount: "Konto erstellen",
       logIn: "Einloggen",
     },
+    cv: {
+      title: "Lebenslauf",
+      subtitle: "Lade deinen Lebenslauf hoch, damit das Interview deinen echten Hintergrund kennt.",
+      uploadLabel: "Lebenslauf hochladen",
+      uploadHint: "PDF, Word (.docx) oder Textdatei, max. 10 MB",
+      analyzeButton: "Analysieren",
+      analyzing: "Wird analysiert …",
+      orDivider: "oder",
+      manualEntry: "Manuell ausfüllen",
+      existingTitle: "Aktuell im Profil gespeichert",
+      noExistingData: "Noch keine Erfahrungen, Projekte oder Skills gespeichert.",
+      reviewTitle: "Ergebnis der Analyse",
+      reviewSubtitle: "Prüfe und bearbeite die erkannten Angaben, bevor du sie übernimmst.",
+      degree: "Abschluss",
+      university: "Universität",
+      experiencesTitle: "Berufserfahrung",
+      company: "Firma",
+      role: "Position",
+      startDate: "Start",
+      endDate: "Ende",
+      present: "Aktuell",
+      description: "Beschreibung",
+      projectsTitle: "Projekte",
+      projectTitle: "Titel",
+      technologies: "Technologien (Komma-getrennt)",
+      skillsTitle: "Skills",
+      skillName: "Skill",
+      hobbiesTitle: "Hobbys & Interessen (Komma-getrennt)",
+      suggestionsTitle: "Verbesserungsvorschläge",
+      removeEntry: "Entfernen",
+      applyButton: "Im Profil übernehmen",
+      applying: "Wird übernommen …",
+      appliedSuccess: "Im Profil gespeichert.",
+      errorGeneric: "Etwas ist schiefgelaufen. Bitte versuche es erneut.",
+    },
   },
   en: {
     nav: {
@@ -248,6 +318,41 @@ export const dictionaries: Record<UiLanguage, Dictionary> = {
       subtitle: "An AI-powered HR interview simulator for international candidates applying for jobs in Germany.",
       createAccount: "Create account",
       logIn: "Log in",
+    },
+    cv: {
+      title: "CV",
+      subtitle: "Upload your CV so the interview knows your real background.",
+      uploadLabel: "Upload CV",
+      uploadHint: "PDF, Word (.docx), or plain text, max 10MB",
+      analyzeButton: "Analyze",
+      analyzing: "Analyzing …",
+      orDivider: "or",
+      manualEntry: "Fill in manually",
+      existingTitle: "Currently saved in your profile",
+      noExistingData: "No experience, projects, or skills saved yet.",
+      reviewTitle: "Analysis result",
+      reviewSubtitle: "Review and edit what was detected before applying it.",
+      degree: "Degree",
+      university: "University",
+      experiencesTitle: "Work experience",
+      company: "Company",
+      role: "Role",
+      startDate: "Start",
+      endDate: "End",
+      present: "Present",
+      description: "Description",
+      projectsTitle: "Projects",
+      projectTitle: "Title",
+      technologies: "Technologies (comma-separated)",
+      skillsTitle: "Skills",
+      skillName: "Skill",
+      hobbiesTitle: "Hobbies & interests (comma-separated)",
+      suggestionsTitle: "Suggestions",
+      removeEntry: "Remove",
+      applyButton: "Apply to profile",
+      applying: "Applying …",
+      appliedSuccess: "Saved to your profile.",
+      errorGeneric: "Something went wrong. Please try again.",
     },
   },
 };

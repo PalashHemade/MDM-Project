@@ -4,6 +4,7 @@ import { useState } from "react";
 import Link from "next/link";
 import type { InterviewTurn, InterviewStatus } from "@/generated/prisma/client";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
+import { Button } from "@/components/ui/Button";
 
 export function InterviewConversation({
   interviewId,
@@ -75,13 +76,9 @@ export function InterviewConversation({
                   onChange={(e) => setAnswerText(e.target.value)}
                   autoFocus
                 />
-                <button
-                  type="submit"
-                  disabled={submitting || !answerText.trim()}
-                  className="w-fit self-end rounded-[10px] bg-red px-5 py-2.5 text-sm font-semibold text-white disabled:opacity-60"
-                >
+                <Button type="submit" disabled={submitting || !answerText.trim()} className="w-fit self-end">
                   {submitting ? t.submitting : t.submitButton}
-                </button>
+                </Button>
               </form>
             )}
           </div>
@@ -92,7 +89,10 @@ export function InterviewConversation({
         <div className="flex flex-col items-start gap-3 rounded-2xl border border-border bg-card p-6">
           <h2 className="font-heading text-lg font-semibold">{t.completeTitle}</h2>
           <p className="text-sm text-ink-soft">{t.completeSub}</p>
-          <Link href="/dashboard" className="rounded-[10px] bg-red px-4 py-2 text-sm font-semibold text-white">
+          <Link
+            href="/dashboard"
+            className="rounded-[10px] bg-red px-4 py-2 text-sm font-semibold text-white transition-colors duration-150 hover:bg-[#9c3625] active:bg-[#8a2f20]"
+          >
             {t.backToDashboard}
           </Link>
         </div>

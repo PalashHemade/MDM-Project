@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
+import { Button } from "@/components/ui/Button";
 
 type Difficulty = "BEGINNER" | "INTERMEDIATE" | "ADVANCED";
 type InterviewType = "GENERAL" | "GERMANY_FOCUSED" | "COMPANY_FOCUSED" | "JOB_FOCUSED";
@@ -43,8 +44,10 @@ export function InterviewSetupForm({ t }: { t: Dictionary["interviewSetup"] }) {
   }
 
   const chip = (selected: boolean) =>
-    `rounded-full border px-4 py-2 text-sm font-medium ${
-      selected ? "border-red bg-red-tint text-red" : "border-border bg-card text-ink"
+    `cursor-pointer rounded-full border px-4 py-2 text-sm font-medium transition-colors duration-150 ${
+      selected
+        ? "border-red bg-red-tint text-red hover:bg-[#f0d3cd]"
+        : "border-border bg-card text-ink hover:border-ink/30 hover:bg-ground"
     }`;
 
   return (
@@ -83,14 +86,9 @@ export function InterviewSetupForm({ t }: { t: Dictionary["interviewSetup"] }) {
         </div>
       </div>
 
-      <button
-        type="button"
-        onClick={handleStart}
-        disabled={loading}
-        className="w-fit rounded-[10px] bg-red px-5 py-2.5 text-sm font-semibold text-white disabled:opacity-60"
-      >
+      <Button type="button" onClick={handleStart} disabled={loading} className="w-fit">
         {t.startButton}
-      </button>
+      </Button>
     </div>
   );
 }

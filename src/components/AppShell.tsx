@@ -7,7 +7,7 @@ export async function AppShell({
   active,
   children,
 }: {
-  active: "dashboard" | "profile" | "interview";
+  active: "dashboard" | "profile" | "interview" | "cv";
   children: React.ReactNode;
 }) {
   const { lang, t } = await getDictionary();

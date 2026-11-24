@@ -4,10 +4,11 @@ import type { Dictionary } from "@/lib/i18n/dictionaries";
 const items: { key: keyof Dictionary["nav"]; href: string }[] = [
   { key: "dashboard", href: "/dashboard" },
   { key: "profile", href: "/profile" },
+  { key: "cv", href: "/cv" },
   { key: "interview", href: "/interview/setup" },
 ];
 
-const comingSoon: (keyof Dictionary["nav"])[] = ["cv", "jobs", "companies", "prep", "history", "german", "progress"];
+const comingSoon: (keyof Dictionary["nav"])[] = ["jobs", "companies", "prep", "history", "german", "progress"];
 
 export function Sidebar({ nav, active }: { nav: Dictionary["nav"]; active: string }) {
   return (
@@ -21,7 +22,7 @@ export function Sidebar({ nav, active }: { nav: Dictionary["nav"]; active: strin
         <Link
           key={item.key}
           href={item.href}
-          className={`flex items-center gap-3 rounded-[10px] px-3.5 py-2.5 text-sm font-medium ${
+          className={`flex items-center gap-3 rounded-[10px] px-3.5 py-2.5 text-sm font-medium transition-colors duration-150 ${
             active === item.key ? "bg-red-tint text-red" : "text-ink-soft hover:bg-ground hover:text-ink"
           }`}
         >
@@ -33,10 +34,13 @@ export function Sidebar({ nav, active }: { nav: Dictionary["nav"]; active: strin
         {comingSoon.map((key) => (
           <span
             key={key}
-            className="flex items-center gap-3 rounded-[10px] px-3.5 py-2.5 text-sm font-medium text-ink-faint opacity-60"
+            className="flex items-center justify-between gap-3 rounded-[10px] px-3.5 py-2.5 text-sm font-medium text-ink-faint"
             title="Coming in a later phase"
           >
             {nav[key]}
+            <span className="rounded-full bg-border/60 px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wide text-ink-faint">
+              Soon
+            </span>
           </span>
         ))}
       </div>

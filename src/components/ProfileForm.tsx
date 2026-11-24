@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import type { CandidateProfile } from "@/generated/prisma/client";
 import { CEFRLevel, TargetLocation, TargetCompanyType } from "@/generated/prisma/enums";
 import type { Dictionary } from "@/lib/i18n/dictionaries";
+import { Button } from "@/components/ui/Button";
 
 type ProfileFields = Pick<
   CandidateProfile,
@@ -163,13 +164,9 @@ export function ProfileForm({ profile, t }: { profile: CandidateProfile; t: Dict
       </div>
 
       <div className="flex items-center gap-3">
-        <button
-          type="submit"
-          disabled={status === "saving"}
-          className="w-fit rounded-[10px] bg-red px-5 py-2.5 text-sm font-semibold text-white disabled:opacity-60"
-        >
+        <Button type="submit" disabled={status === "saving"} className="w-fit">
           {t.save}
-        </button>
+        </Button>
         {status === "saved" && <span className="text-sm text-ink-soft">{t.saved}</span>}
       </div>
     </form>
